@@ -25,6 +25,7 @@ const validationSchema = yup.object({
   last_name: yup.string().required('Last name is required'),
   email: yup.string().email('Invalid email').required('Email is required'),
   role: yup.string().required('Role is required'),
+  department_id: yup.number().required('Department is required'),
   hourly_rate: yup.number().min(0, 'Hourly rate must be positive'),
   max_hours_per_week: yup.number().min(1).max(168, 'Invalid hours per week'),
 });
@@ -58,7 +59,7 @@ const skillsOptions = [
   'Radiology',
 ];
 
-export default function StaffFormDialog({ open, staff, onClose, onSave, error }) {
+export default function StaffFormDialog({ open, staff, onClose, onSave, error, departments = [] }) {
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [backendErrors, setBackendErrors] = useState({});
 
@@ -105,18 +106,18 @@ export default function StaffFormDialog({ open, staff, onClose, onSave, error })
 
   const formik = useFormik({
     initialValues: {
-      employee_id: '',
-      first_name: '',
-      last_name: '',
-      email: '',
-      phone: '',
-      role: '',
-      department_id: '',
-      status: 'active',
-      hourly_rate: '',
-      max_hours_per_week: 40,
-      skills: '',
-      certifications: '',
+      employee_id: staff ? staff.employee_id || '' : '',
+      first_name: staff ? staff.first_name || '' : '',
+      last_name: staff ? staff.last_name || '' : '',
+      email: staff ? staff.email || '' : '',
+      phone: staff ? staff.phone || '' : '',
+      role: staff ? staff.role || '' : '',
+      department_id: staff ? staff.department_id || '' : '',
+      status: staff ? staff.status || 'active' : 'active',
+      hourly_rate: staff ? staff.hourly_rate || 0 : 0,
+      max_hours_per_week: staff ? staff.max_hours_per_week || 40 : 40,
+      skills: staff ? staff.skills || [] : [],
+      certifications: staff ? staff.certifications || '' : '',
     },
     validationSchema,
     onSubmit: (values) => {
@@ -277,6 +278,26 @@ export default function StaffFormDialog({ open, staff, onClose, onSave, error })
                   {roleOptions.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <InputLabel>Department</InputLabel>
+                <Select
+                  name="department_id"
+                  value={formik.values.department_id}
+                  onChange={formik.handleChange}
+                  error={formik.touched.department_id && Boolean(formik.errors.department_id)}
+                  disabled={departments.length === 0}
+                >
+                  <MenuItem value="" disabled>Select a department</MenuItem>
+                  {departments.map((dept) => (
+                    <MenuItem key={dept.id} value={dept.id}>
+                      {dept.name}
                     </MenuItem>
                   ))}
                 </Select>

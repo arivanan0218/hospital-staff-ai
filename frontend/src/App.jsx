@@ -5,6 +5,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { WebSocketProvider } from './contexts/WebSocketContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import MainLayout from './components/common/MainLayout';
 import Dashboard from './pages/Dashboard';
 import StaffManagement from './pages/StaffManagement';
@@ -13,6 +15,7 @@ import AttendanceManagement from './pages/AttendanceManagement';
 import AllocationManagement from './pages/AllocationManagement';
 import ShiftAssignments from './pages/ShiftAssignments';
 import Analytics from './pages/Analytics';
+import DepartmentManagement from './components/departments/DepartmentManagement.jsx';
 import './App.css';
 
 const theme = createTheme({
@@ -49,7 +52,19 @@ function App() {
                 <Route path="/allocation" element={<AllocationManagement />} />
                 <Route path="/shift-assignments" element={<ShiftAssignments />} />
                 <Route path="/analytics" element={<Analytics />} />
+                <Route path="/departments" element={<DepartmentManagement />} />
               </Routes>
+              <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
             </MainLayout>
           </Router>
         </WebSocketProvider>

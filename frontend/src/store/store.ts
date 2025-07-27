@@ -3,6 +3,7 @@ import staffReducer from './slices/staffSlice';
 import shiftReducer from './slices/shiftSlice';
 import allocationReducer from './slices/allocationSlice';
 import dashboardReducer from './slices/dashboardSlice';
+import departmentReducer from './slices/departmentSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     shifts: shiftReducer,
     allocation: allocationReducer,
     dashboard: dashboardReducer,
+    departments: departmentReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

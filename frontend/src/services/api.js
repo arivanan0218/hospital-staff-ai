@@ -171,4 +171,68 @@ export const dashboardAPI = {
   getAlerts: () => apiClient.get('/dashboard/alerts'),
 };
 
+// Departments API
+export const departmentsAPI = {
+  getAll: async (params = {}) => {
+    try {
+      const response = await apiClient.get('/departments', { params });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching departments:', error);
+      throw error;
+    }
+  },
+
+  getById: async (id) => {
+    try {
+      const response = await apiClient.get(`/departments/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching department ${id}:`, error);
+      throw error;
+    }
+  },
+
+  create: async (departmentData) => {
+    try {
+      const response = await apiClient.post('/departments', departmentData);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating department:', error);
+      throw error;
+    }
+  },
+
+  update: async (id, departmentData) => {
+    try {
+      const response = await apiClient.put(`/departments/${id}`, departmentData);
+      return response.data;
+    } catch (error) {
+      console.error(`Error updating department ${id}:`, error);
+      throw error;
+    }
+  },
+
+  delete: async (id) => {
+    try {
+      const response = await apiClient.delete(`/departments/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error deleting department ${id}:`, error);
+      throw error;
+    }
+  },
+
+  // Get staff members in a specific department
+  getStaff: async (departmentId, params = {}) => {
+    try {
+      const response = await apiClient.get(`/departments/${departmentId}/staff`, { params });
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching staff for department ${departmentId}:`, error);
+      throw error;
+    }
+  }
+};
+
 export default apiClient;

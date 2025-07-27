@@ -28,6 +28,7 @@ import {
   Notifications,
   Settings,
   AccountCircle,
+  Business,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useWebSocket } from '../../contexts/WebSocketContext';
@@ -43,6 +44,7 @@ const menuItems = [
   { text: 'Attendance', icon: <Assignment />, path: '/attendance' },
   { text: 'Allocation', icon: <Assignment />, path: '/allocation' },
   { text: 'Analytics', icon: <Analytics />, path: '/analytics' },
+  { text: 'Departments', icon: <Business />, path: '/departments' },
 ];
 
 export default function MainLayout({ children }) {

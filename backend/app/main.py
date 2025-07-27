@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 import uvicorn
 import json
 from typing import List, Dict
-from app.routers import staff, shifts, dashboard, allocation
+from app.routers import staff, shifts, dashboard, allocation, departments
 # Uncomment these when the routers are implemented
 # from app.routers import attendance
 from app.database import engine, Base
@@ -35,6 +35,7 @@ manager = ConnectionManager()
 app.include_router(staff.router, prefix="/api/staff", tags=["staff"])
 app.include_router(shifts.router, prefix="/api/shifts", tags=["shifts"])
 app.include_router(dashboard.router, prefix="/api/dashboard", tags=["dashboard"])
+app.include_router(departments.router, prefix="/api/departments", tags=["departments"])
 
 # Uncomment these when the routers are implemented
 # app.include_router(attendance.router, prefix="/api/attendance", tags=["attendance"])

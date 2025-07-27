@@ -42,12 +42,14 @@ import {
 } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchStaff, createStaff, updateStaff, deleteStaff, setFilters } from '../store/slices/staffSlice';
+import { fetchDepartments } from '../store/slices/departmentSlice';
 import StaffDetailsDialog from '../components/staff/StaffDetailsDialog';
 import StaffFormDialog from '../components/staff/StaffFormDialog';
 
 export default function StaffManagement() {
   const dispatch = useDispatch();
   const { list: staff, loading, filters, pagination } = useSelector(state => state.staff);
+  const { list: departments = [], loading: departmentsLoading } = useSelector(state => state.departments || {});
   
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -60,7 +62,11 @@ export default function StaffManagement() {
 
   useEffect(() => {
     dispatch(fetchStaff({ skip: page * rowsPerPage, limit: rowsPerPage, filters }));
-  }, [dispatch, page, rowsPerPage, filters]);
+    // Fetch departments if not already loaded
+    if (departments.length === 0) {
+      dispatch(fetchDepartments());
+    }
+  }, [dispatch, page, rowsPerPage, filters, departments.length]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -345,19 +351,11 @@ export default function StaffManagement() {
       </Fab>
 
       {/* Dialogs */}
-      <StaffDetailsDialog
-        open={showDetailsDialog}
-        staff={selectedStaff}
-        onClose={() => {
-          setShowDetailsDialog(false);
-          setSelectedStaff(null);
-        }}
-      />
-
       <StaffFormDialog
         open={showFormDialog}
         staff={editMode ? selectedStaff : null}
         error={formError}
+        departments={departments}
         onClose={() => {
           setShowFormDialog(false);
           setSelectedStaff(null);
