@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 import uvicorn
 import json
 from typing import List, Dict
-from app.routers import staff, shifts, dashboard, allocation, departments
+from app.routers import staff, shifts, dashboard, allocation, departments, chatbot
 # Uncomment these when the routers are implemented
 # from app.routers import attendance
 from app.database import engine, Base
@@ -40,6 +40,7 @@ app.include_router(departments.router, prefix="/api/departments", tags=["departm
 # Uncomment these when the routers are implemented
 # app.include_router(attendance.router, prefix="/api/attendance", tags=["attendance"])
 app.include_router(allocation.router, prefix="/api/allocation", tags=["allocation"])
+app.include_router(chatbot.router)
 
 @app.websocket("/ws/{client_id}")
 async def websocket_endpoint(websocket: WebSocket, client_id: str):

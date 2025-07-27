@@ -16,6 +16,7 @@ import AllocationManagement from './pages/AllocationManagement';
 import ShiftAssignments from './pages/ShiftAssignments';
 import Analytics from './pages/Analytics';
 import DepartmentManagement from './components/departments/DepartmentManagement.jsx';
+import Chatbot from './components/chatbot/Chatbot';
 import './App.css';
 
 const theme = createTheme({
@@ -54,20 +55,21 @@ function App() {
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/departments" element={<DepartmentManagement />} />
               </Routes>
-              <ToastContainer 
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-              />
+              <Chatbot />
             </MainLayout>
           </Router>
         </WebSocketProvider>
+        <ToastContainer 
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </ThemeProvider>
     </Provider>
   );

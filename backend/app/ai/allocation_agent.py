@@ -1,6 +1,6 @@
 from app.ai.base_agent import BaseAgent
 from typing import Dict, Any, List
-from langchain.schema import HumanMessage, SystemMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 import json
 from datetime import datetime, timedelta
 
