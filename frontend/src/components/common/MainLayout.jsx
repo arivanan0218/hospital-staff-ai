@@ -256,7 +256,7 @@ const menuItems = [
   { text: 'Staff', icon: <People />, path: '/staff' },
   { text: 'Shifts', icon: <Schedule />, path: '/shifts' },
   { text: 'Shift Assignments', icon: <AssignmentInd />, path: '/shift-assignments' },
-  { text: 'Attendance', icon: <Assignment />, path: '/attendance' },
+  // { text: 'Attendance', icon: <Assignment />, path: '/attendance' },
   { text: 'Allocation', icon: <Assignment />, path: '/allocation' },
   { text: 'Analytics', icon: <Analytics />, path: '/analytics' },
   { text: 'Departments', icon: <Business />, path: '/departments' },
@@ -497,7 +497,7 @@ export default function MainLayout({ children }) {
                     borderColor: '#d0d0d0',
                   },
                 }}>
-                  JD
+                  AV
                 </Avatar>
               </IconButton>
             </Tooltip>

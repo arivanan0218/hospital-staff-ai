@@ -7,8 +7,10 @@ const DepartmentManagement = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Department Management</h1>
-      
+      {/* <Typography variant="h4" gutterBottom>
+        Department Management
+      </Typography>
+       */}
       {selectedDepartment ? (
         <DepartmentStaff 
           departmentId={selectedDepartment.id} 
