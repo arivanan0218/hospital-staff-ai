@@ -82,3 +82,25 @@ class ShiftService:
         ).all()
         
         return assigned_shifts
+
+    def update_shift(self, shift_id: int, shift_update: ShiftUpdate) -> Optional[Shift]:
+        db_shift = self.get_shift_by_id(shift_id)
+        if not db_shift:
+            return None
+        update_data = shift_update.dict(exclude_unset=True)
+        for field, value in update_data.items():
+            setattr(db_shift, field, value)
+        self.db.commit()
+        self.db.refresh(db_shift)
+        return db_shift
+
+    def delete_shift(self, shift_id: int) -> bool:
+        db_shift = self.get_shift_by_id(shift_id)
+        if not db_shift:
+            return False
+        self.db.delete(db_shift)
+        self.db.commit()
+        return True
+
+    def get_shift_list(self, *args, **kwargs):
+        return self.get_shifts_list(*args, **kwargs)
